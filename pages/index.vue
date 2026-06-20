@@ -353,9 +353,7 @@ export default {
 }
 
 .category-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(0, 255, 17, 0.08);
-  border-color: rgba(0, 255, 17, 0.2);
+  transform: translateY(-2px);
 }
 
 .category-icon {
