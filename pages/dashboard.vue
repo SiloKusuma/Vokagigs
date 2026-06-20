@@ -17,7 +17,10 @@
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><briefcase xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></briefcase></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
             </div>
             <div class="stat-card-info">
               <span class="stat-card-value">{{ stats.total_gigs }}</span>
@@ -26,7 +29,10 @@
           </div>
           <div class="stat-card">
             <div class="stat-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><check-circle xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></check-circle></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
             </div>
             <div class="stat-card-info">
               <span class="stat-card-value">{{ stats.completed }}</span>
@@ -35,7 +41,10 @@
           </div>
           <div class="stat-card">
             <div class="stat-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><clock xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></clock></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
             </div>
             <div class="stat-card-info">
               <span class="stat-card-value">{{ stats.in_progress }}</span>
@@ -44,7 +53,10 @@
           </div>
           <div class="stat-card">
             <div class="stat-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><dollar-sign xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></dollar-sign></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
             </div>
             <div class="stat-card-info">
               <span class="stat-card-value">Rp{{ formatPrice(stats.earnings) }}</span>
@@ -57,26 +69,26 @@
           <div class="dashboard-section">
             <div class="section-header">
               <h2>Gigs Saya</h2>
-              <button class="btn btn-primary btn-sm" @click="showAddForm = !showAddForm">
+              <button class="btn btn-primary btn-sm" @click="toggleAddForm" v-if="!editingGig">
                 + Tambah Gig
               </button>
             </div>
 
-            <div class="add-gig-form" v-if="showAddForm">
-              <h3>Buat Gig Baru</h3>
-              <form @submit.prevent="handleAddGig">
+            <div class="gig-form" v-if="showAddForm || editingGig">
+              <h3>{{ editingGig ? 'Edit Gig' : 'Buat Gig Baru' }}</h3>
+              <form @submit.prevent="editingGig ? handleUpdateGig() : handleAddGig()">
                 <div class="form-group">
                   <label>Judul Gig</label>
-                  <input type="text" v-model="newGig.title" placeholder="Masukkan judul gig" required />
+                  <input type="text" v-model="gigForm.title" placeholder="Masukkan judul gig" required />
                 </div>
                 <div class="form-group">
                   <label>Deskripsi</label>
-                  <textarea v-model="newGig.description" placeholder="Deskripsikan layanan Anda" rows="4" required></textarea>
+                  <textarea v-model="gigForm.description" placeholder="Deskripsikan layanan Anda" rows="4" required></textarea>
                 </div>
                 <div class="form-row">
                   <div class="form-group">
                     <label>Kategori</label>
-                    <select v-model="newGig.category" required>
+                    <select v-model="gigForm.category" required>
                       <option value="">Pilih kategori</option>
                       <option value="Desain Grafis">Desain Grafis</option>
                       <option value="Penulisan & Terjemahan">Penulisan & Terjemahan</option>
@@ -88,14 +100,14 @@
                   </div>
                   <div class="form-group">
                     <label>Harga (Rp)</label>
-                    <input type="number" v-model="newGig.price" placeholder="Harga" required min="1000" />
+                    <input type="number" v-model="gigForm.price" placeholder="Harga" required min="1000" />
                   </div>
                 </div>
                 <div class="form-actions">
-                  <button type="submit" class="btn btn-primary" :disabled="addingGig">
-                    {{ addingGig ? 'Menyimpan...' : 'Simpan Gig' }}
+                  <button type="submit" class="btn btn-primary" :disabled="savingGig">
+                    {{ savingGig ? 'Menyimpan...' : (editingGig ? 'Simpan Perubahan' : 'Simpan Gig') }}
                   </button>
-                  <button type="button" class="btn btn-secondary" @click="showAddForm = false">Batal</button>
+                  <button type="button" class="btn btn-secondary" @click="cancelGigForm">Batal</button>
                 </div>
               </form>
             </div>
@@ -109,12 +121,30 @@
                 <p class="gig-desc">{{ gig.description }}</p>
                 <div class="gig-card-footer">
                   <span class="gig-category">{{ gig.category }}</span>
-                  <span class="gig-price">Rp{{ formatPrice(gig.price) }}</span>
+                  <div class="gig-card-actions">
+                    <span class="gig-price">Rp{{ formatPrice(gig.price) }}</span>
+                    <button class="btn-edit" @click="handleEditGig(gig)">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                      </svg>
+                    </button>
+                    <button class="btn-copy" @click="copyGigLink(gig)" :title="'Salin link gig'">
+                      <span class="copy-feedback" v-if="copiedGigId === gig.id">Tersalin!</span>
+                      <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="empty-state" v-else>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><briefcase xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></briefcase></svg>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
               <p>Belum ada gig. Buat gig pertama Anda!</p>
             </div>
           </div>
@@ -146,8 +176,10 @@ export default {
       },
       gigs: [],
       showAddForm: false,
-      addingGig: false,
-      newGig: {
+      editingGig: null,
+      savingGig: false,
+      copiedGigId: null,
+      gigForm: {
         title: '',
         description: '',
         category: '',
@@ -187,8 +219,30 @@ export default {
         console.error('Failed to load dashboard:', err)
       }
     },
+    toggleAddForm() {
+      this.showAddForm = !this.showAddForm
+      if (this.showAddForm) {
+        this.editingGig = null
+        this.gigForm = { title: '', description: '', category: '', price: '' }
+      }
+    },
+    handleEditGig(gig) {
+      this.editingGig = gig
+      this.showAddForm = false
+      this.gigForm = {
+        title: gig.title,
+        description: gig.description,
+        category: gig.category,
+        price: gig.price
+      }
+    },
+    cancelGigForm() {
+      this.showAddForm = false
+      this.editingGig = null
+      this.gigForm = { title: '', description: '', category: '', price: '' }
+    },
     async handleAddGig() {
-      this.addingGig = true
+      this.savingGig = true
       try {
         const token = localStorage.getItem('vokagigs_token')
         const response = await fetch(`${API_BASE}/gigs.php`, {
@@ -197,19 +251,43 @@ export default {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify(this.newGig)
+          body: JSON.stringify(this.gigForm)
         })
         const result = await response.json()
         if (result.status === 'success') {
           this.gigs.unshift(result.gig)
-          this.showAddForm = false
-          this.newGig = { title: '', description: '', category: '', price: '' }
+          this.cancelGigForm()
           this.stats.total_gigs++
         }
       } catch (err) {
         console.error('Failed to add gig:', err)
       } finally {
-        this.addingGig = false
+        this.savingGig = false
+      }
+    },
+    async handleUpdateGig() {
+      this.savingGig = true
+      try {
+        const token = localStorage.getItem('vokagigs_token')
+        const response = await fetch(`${API_BASE}/gigs.php`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ id: this.editingGig.id, ...this.gigForm })
+        })
+        const result = await response.json()
+        if (result.status === 'success') {
+          const idx = this.gigs.findIndex(g => g.id === this.editingGig.id)
+          if (idx !== -1) this.gigs.splice(idx, 1, result.gig)
+          this.cancelGigForm()
+          this.loadDashboard()
+        }
+      } catch (err) {
+        console.error('Failed to update gig:', err)
+      } finally {
+        this.savingGig = false
       }
     },
     handleLogout() {
@@ -220,6 +298,17 @@ export default {
     },
     formatPrice(price) {
       return parseInt(price).toLocaleString('id-ID')
+    },
+    copyGigLink(gig) {
+      const id = String(gig.id).padStart(10, '0')
+      const url = `${window.location.origin}/gigs/${id}`
+      navigator.clipboard.writeText(url)
+      this.copiedGigId = gig.id
+      setTimeout(() => {
+        if (this.copiedGigId === gig.id) {
+          this.copiedGigId = null
+        }
+      }, 2000)
     }
   }
 }
@@ -346,7 +435,7 @@ export default {
   color: #111111;
 }
 
-.add-gig-form {
+.gig-form {
   background: #f9f9f9;
   padding: 28px;
   border-radius: 12px;
@@ -354,7 +443,7 @@ export default {
   border: 1px solid rgba(0, 255, 17, 0.15);
 }
 
-.add-gig-form h3 {
+.gig-form h3 {
   font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 600;
@@ -440,6 +529,55 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.gig-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-edit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.btn-edit:hover {
+  color: #00ff11;
+  background: rgba(0, 255, 17, 0.08);
+}
+
+.btn-copy {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.btn-copy:hover {
+  color: #00ff11;
+  background: rgba(0, 255, 17, 0.08);
+}
+
+.copy-feedback {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #00cc0e;
+  white-space: nowrap;
 }
 
 .gig-category {

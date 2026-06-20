@@ -23,18 +23,16 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     jsonResponse(['status' => 'error', 'message' => 'Format email tidak valid'], 400);
 }
 
-$db = getDB();
+$db = getDB('users');
 
-$stmt = $db->prepare('SELECT id FROM users WHERE email = ?');
-$stmt->execute([$email]);
-if ($stmt->fetch()) {
+$result = query($db, 'SELECT id FROM users WHERE email = ?', [$email]);
+if (fetch($result)) {
     jsonResponse(['status' => 'error', 'message' => 'Email sudah terdaftar'], 409);
 }
 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-$stmt = $db->prepare('INSERT INTO users (name, email, password, created_at) VALUES (?, ?, ?, NOW())');
-$stmt->execute([$name, $email, $hashedPassword]);
+query($db, "INSERT INTO users (name, email, password, created_at) VALUES (?, ?, ?, datetime('now'))", [$name, $email, $hashedPassword]);
 
 jsonResponse([
     'status' => 'success',

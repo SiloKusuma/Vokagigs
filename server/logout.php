@@ -11,9 +11,8 @@ if (!$token) {
     jsonResponse(['status' => 'error', 'message' => 'Token tidak ditemukan'], 400);
 }
 
-$db = getDB();
-$stmt = $db->prepare('DELETE FROM tokens WHERE token = ?');
-$stmt->execute([$token]);
+$db = getDB('tokens');
+query($db, 'DELETE FROM tokens WHERE token = ?', [$token]);
 
 jsonResponse([
     'status' => 'success',

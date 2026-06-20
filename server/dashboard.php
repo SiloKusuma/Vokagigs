@@ -12,27 +12,22 @@ if (!$user) {
     jsonResponse(['status' => 'error', 'message' => 'Token tidak valid atau sesi habis'], 401);
 }
 
-$db = getDB();
+$db = getDB('gigs');
 
-$stmt = $db->prepare('SELECT COUNT(*) as total FROM gigs WHERE user_id = ?');
-$stmt->execute([$user['id']]);
-$totalGigs = $stmt->fetch()['total'];
+$result = query($db, 'SELECT COUNT(*) as total FROM gigs WHERE user_id = ?', [$user['id']]);
+$totalGigs = fetch($result)['total'];
 
-$stmt = $db->prepare("SELECT COUNT(*) as total FROM gigs WHERE user_id = ? AND status = 'completed'");
-$stmt->execute([$user['id']]);
-$completed = $stmt->fetch()['total'];
+$result = query($db, "SELECT COUNT(*) as total FROM gigs WHERE user_id = ? AND status = 'completed'", [$user['id']]);
+$completed = fetch($result)['total'];
 
-$stmt = $db->prepare("SELECT COUNT(*) as total FROM gigs WHERE user_id = ? AND status = 'active'");
-$stmt->execute([$user['id']]);
-$inProgress = $stmt->fetch()['total'];
+$result = query($db, "SELECT COUNT(*) as total FROM gigs WHERE user_id = ? AND status = 'active'", [$user['id']]);
+$inProgress = fetch($result)['total'];
 
-$stmt = $db->prepare('SELECT COALESCE(SUM(price), 0) as total FROM gigs WHERE user_id = ? AND status = ?');
-$stmt->execute([$user['id'], 'completed']);
-$earnings = $stmt->fetch()['total'];
+$result = query($db, 'SELECT COALESCE(SUM(price), 0) as total FROM gigs WHERE user_id = ? AND status = ?', [$user['id'], 'completed']);
+$earnings = fetch($result)['total'];
 
-$stmt = $db->prepare('SELECT * FROM gigs WHERE user_id = ? ORDER BY created_at DESC');
-$stmt->execute([$user['id']]);
-$gigs = $stmt->fetchAll();
+$result = query($db, 'SELECT * FROM gigs WHERE user_id = ? ORDER BY created_at DESC', [$user['id']]);
+$gigs = fetchAll($result);
 
 jsonResponse([
     'status' => 'success',

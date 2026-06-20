@@ -64,7 +64,6 @@ a:hover {
 .btn-primary:hover {
   background: #00cc0e;
   color: #ffffff;
-  transform: translateY(-2px);
 }
 
 .btn-secondary {
@@ -76,7 +75,6 @@ a:hover {
 .btn-secondary:hover {
   background: #111111;
   color: #ffffff;
-  transform: translateY(-2px);
 }
 
 .btn-outline {
@@ -88,7 +86,6 @@ a:hover {
 .btn-outline:hover {
   background: #00ff11;
   color: #111111;
-  transform: translateY(-2px);
 }
 
 .btn-dark {
@@ -98,8 +95,6 @@ a:hover {
 
 .btn-dark:hover {
   background: #000000;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .section {

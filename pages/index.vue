@@ -62,7 +62,7 @@
         <h2 class="section-title">Kategori Populer</h2>
         <p class="section-subtitle">Temukan berbagai layanan dari talenta terbaik</p>
         <div class="categories-grid">
-          <div class="category-card" v-for="(cat, index) in categories" :key="index">
+          <div class="category-card" v-for="(cat, index) in categories" :key="index" @click="goToCategory(cat.name)">
             <div class="category-icon" v-html="cat.icon"></div>
             <h3 class="category-name">{{ cat.name }}</h3>
             <p class="category-count">{{ cat.count }} gigs</p>
@@ -151,6 +151,11 @@ export default {
           description: 'Mulai proyek Anda dan dapatkan hasil berkualitas tinggi dengan sistem yang terjamin.'
         }
       ]
+    }
+  },
+  methods: {
+    goToCategory(name) {
+      this.$router.push({ path: '/gigs', query: { category: name } })
     }
   }
 }

@@ -14,10 +14,9 @@ if (!$input || empty($input['email']) || empty($input['password'])) {
 $email = trim($input['email']);
 $password = $input['password'];
 
-$db = getDB();
-$stmt = $db->prepare('SELECT * FROM users WHERE email = ?');
-$stmt->execute([$email]);
-$user = $stmt->fetch();
+$db = getDB('users');
+$result = query($db, 'SELECT * FROM users WHERE email = ?', [$email]);
+$user = fetch($result);
 
 if (!$user || !password_verify($password, $user['password'])) {
     jsonResponse(['status' => 'error', 'message' => 'Email atau kata sandi salah'], 401);
@@ -25,8 +24,8 @@ if (!$user || !password_verify($password, $user['password'])) {
 
 $token = generateToken();
 
-$stmt = $db->prepare('INSERT INTO tokens (user_id, token, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 30 DAY))');
-$stmt->execute([$user['id'], $token]);
+$db = getDB('tokens');
+query($db, "INSERT INTO tokens (user_id, token, expires_at) VALUES (?, ?, datetime('now', '+30 days'))", [$user['id'], $token]);
 
 jsonResponse([
     'status' => 'success',
