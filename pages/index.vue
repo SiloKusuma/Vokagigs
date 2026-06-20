@@ -91,6 +91,9 @@
     <section class="cta-section section">
       <div class="container">
         <div class="cta-card">
+          <div class="cta-coin">
+            <img src="/coin.png" alt="Coin" class="coin-img" />
+          </div>
           <h2 class="cta-title">Siap Memulai?</h2>
           <p class="cta-text">Bergabung dengan ribuan talenta dan klien yang sudah menggunakan Vokagigs</p>
           <div class="cta-actions">
@@ -442,6 +445,16 @@ export default {
   font-size: 15px;
   color: #666;
   line-height: 1.7;
+}
+
+.cta-coin {
+  margin-bottom: 24px;
+}
+
+.coin-img {
+  width: 130px;
+  height: auto;
+  display: inline-block;
 }
 
 .cta-card {
