@@ -87,22 +87,6 @@
         </div>
       </div>
     </section>
-
-    <section class="cta-section section">
-      <div class="container">
-        <div class="cta-card">
-          <div class="cta-coin">
-            <img src="/coin.png" alt="Coin" class="coin-img" />
-          </div>
-          <h2 class="cta-title">Siap Memulai?</h2>
-          <p class="cta-text">Bergabung dengan ribuan talenta dan klien yang sudah menggunakan Vokagigs</p>
-          <div class="cta-actions">
-            <NuxtLink to="/login?tab=register" class="btn btn-dark btn-lg">Daftar Sekarang</NuxtLink>
-            <NuxtLink to="/login" class="btn btn-outline btn-lg">Masuk</NuxtLink>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
