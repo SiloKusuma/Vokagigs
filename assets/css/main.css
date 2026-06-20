@@ -58,6 +58,7 @@ a:hover {
 .btn-primary {
   background: #00ff11;
   color: #111111;
+  border: 2px solid transparent;
 }
 
 .btn-primary:hover {
