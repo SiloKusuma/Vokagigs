@@ -409,7 +409,7 @@ export default {
   justify-content: center;
   margin: 0 auto 20px;
   background: #00ff11;
-  color: #111111;
+  color: #ffffff;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 28px;
   font-weight: 800;
