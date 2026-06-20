@@ -449,12 +449,17 @@ export default {
 
 .cta-coin {
   margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
 }
 
 .coin-img {
   width: 130px;
   height: auto;
-  display: inline-block;
+  display: block;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px;
 }
 
 .cta-card {
