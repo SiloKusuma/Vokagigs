@@ -2,40 +2,45 @@
   <div class="landing">
     <section class="hero section">
       <div class="container">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#00ff11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            Platform Gig Online Terpercaya
+        <div class="hero-wrapper">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#00ff11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Platform Gig Online Terpercaya
+            </div>
+            <h1 class="hero-title">
+              Temukan <span class="text-green">Talenta</span> Terbaik<br>Untuk Proyek Anda
+            </h1>
+            <p class="hero-subtitle">
+              Vokagigs menghubungkan Anda dengan ribuan pekerja lepas profesional<br>
+              di berbagai bidang. Mulai proyek Anda hari ini.
+            </p>
+            <div class="hero-actions">
+              <NuxtLink to="/login?tab=register" class="btn btn-primary btn-lg">
+                Mulai Sekarang
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </NuxtLink>
+              <a href="#features" class="btn btn-secondary btn-lg">
+                Pelajari Lebih Lanjut
+              </a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Pekerja Lepas</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">5K+</span>
+                <span class="stat-label">Proyek Selesai</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">Kepuasan</span>
+              </div>
+            </div>
           </div>
-          <h1 class="hero-title">
-            Temukan <span class="text-green">Talenta</span> Terbaik<br>Untuk Proyek Anda
-          </h1>
-          <p class="hero-subtitle">
-            Vokagigs menghubungkan Anda dengan ribuan pekerja lepas profesional<br>
-            di berbagai bidang. Mulai proyek Anda hari ini.
-          </p>
-          <div class="hero-actions">
-            <NuxtLink to="/login?tab=register" class="btn btn-primary btn-lg">
-              Mulai Sekarang
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </NuxtLink>
-            <a href="#features" class="btn btn-secondary btn-lg">
-              Pelajari Lebih Lanjut
-            </a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-number">10K+</span>
-              <span class="stat-label">Pekerja Lepas</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">5K+</span>
-              <span class="stat-label">Proyek Selesai</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">98%</span>
-              <span class="stat-label">Kepuasan</span>
-            </div>
+          <div class="hero-banner">
+            <img src="/banner1.png" alt="Vokagigs Banner" class="banner-img" />
           </div>
         </div>
       </div>
@@ -169,13 +174,32 @@ export default {
 
 <style scoped>
 .hero {
-  padding-top: 120px;
-  text-align: center;
+  padding-top: 100px;
+}
+
+.hero-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
 }
 
 .hero-content {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100%;
+}
+
+.hero-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-img {
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 255, 17, 0.12);
 }
 
 .hero-badge {
@@ -447,6 +471,19 @@ export default {
 @media (max-width: 768px) {
   .hero {
     padding-top: 80px;
+  }
+
+  .hero-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-banner {
+    order: -1;
+  }
+
+  .banner-img {
+    max-width: 100%;
   }
 
   .hero-title {
