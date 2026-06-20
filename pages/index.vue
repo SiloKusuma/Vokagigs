@@ -198,8 +198,7 @@ export default {
   width: 100%;
   max-width: 540px;
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 255, 17, 0.12);
+  border-radius: 16px;
 }
 
 .hero-badge {
@@ -242,7 +241,7 @@ export default {
 .hero-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 16px;
   margin-bottom: 60px;
 }
@@ -255,14 +254,14 @@ export default {
 
 .hero-stats {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 60px;
   padding: 30px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .stat-item {
-  text-align: center;
+  text-align: left;
 }
 
 .stat-number {
