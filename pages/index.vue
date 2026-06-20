@@ -299,9 +299,8 @@ export default {
 }
 
 .feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0, 255, 17, 0.1);
-  border-color: rgba(0, 255, 17, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .feature-icon {
