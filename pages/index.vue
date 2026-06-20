@@ -158,7 +158,10 @@ export default {
 
 <style scoped>
 .hero {
-  padding-top: 100px;
+  padding-top: 40px;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
 }
 
 .hero-wrapper {
@@ -166,6 +169,7 @@ export default {
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
+  width: 100%;
 }
 
 .hero-content {
@@ -176,6 +180,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
 .banner-img {
@@ -471,6 +476,8 @@ export default {
 @media (max-width: 768px) {
   .hero {
     padding-top: 80px;
+    min-height: auto;
+    display: block;
   }
 
   .hero-wrapper {
