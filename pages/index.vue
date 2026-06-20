@@ -299,8 +299,21 @@ export default {
 }
 
 .feature-card:hover {
+  background: #00ff11;
   transform: translateY(-4px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.feature-card:hover .feature-title,
+.feature-card:hover .feature-desc {
+  color: #ffffff;
+}
+
+.feature-card:hover .feature-icon {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.feature-card:hover .feature-icon svg {
+  stroke: #ffffff;
 }
 
 .feature-icon {
@@ -312,6 +325,11 @@ export default {
   background: rgba(0, 255, 17, 0.08);
   border-radius: 14px;
   margin-bottom: 20px;
+  transition: all 0.4s ease;
+}
+
+.feature-icon svg {
+  transition: stroke 0.4s ease;
 }
 
 .feature-title {
@@ -320,6 +338,7 @@ export default {
   font-weight: 700;
   color: #111111;
   margin-bottom: 10px;
+  transition: color 0.4s ease;
 }
 
 .feature-desc {
@@ -327,6 +346,7 @@ export default {
   font-size: 15px;
   color: #666;
   line-height: 1.7;
+  transition: color 0.4s ease;
 }
 
 .categories-grid {
