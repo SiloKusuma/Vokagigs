@@ -4,10 +4,7 @@
       <div class="container">
         <div class="hero-wrapper">
           <div class="hero-content">
-            <div class="hero-badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#00ff11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              Platform Gig Online Terpercaya
-            </div>
+
             <h1 class="hero-title">
               Temukan <span class="text-green">Talenta</span> Terbaik<br>Untuk Proyek Anda
             </h1>
@@ -186,21 +183,6 @@ export default {
   max-width: 540px;
   height: auto;
   border-radius: 16px;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  background: rgba(0, 255, 17, 0.08);
-  border: 1px solid rgba(0, 255, 17, 0.2);
-  border-radius: 50px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #00cc0e;
-  margin-bottom: 24px;
 }
 
 .hero-title {
