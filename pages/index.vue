@@ -158,17 +158,14 @@ export default {
 
 <style scoped>
 .hero {
-  padding-top: 40px;
-  min-height: calc(100vh - 70px);
-  display: flex;
-  align-items: center;
+  padding: 60px 0;
 }
 
 .hero-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 
@@ -178,14 +175,14 @@ export default {
 
 .hero-banner {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  height: 100%;
+  padding-top: 20px;
 }
 
 .banner-img {
   width: 100%;
-  max-width: 540px;
+  max-width: 520px;
   height: auto;
   border-radius: 16px;
 }
@@ -475,9 +472,7 @@ export default {
 
 @media (max-width: 768px) {
   .hero {
-    padding-top: 80px;
-    min-height: auto;
-    display: block;
+    padding: 80px 0 40px;
   }
 
   .hero-wrapper {
@@ -487,6 +482,7 @@ export default {
 
   .hero-banner {
     order: -1;
+    padding-top: 0;
   }
 
   .banner-img {
