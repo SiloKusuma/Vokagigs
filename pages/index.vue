@@ -309,7 +309,7 @@ export default {
 }
 
 .feature-card:hover .feature-icon {
-  background: rgba(255, 255, 255, 0.2);
+  background: #0a7a0e;
 }
 
 .feature-card:hover .feature-icon svg {
